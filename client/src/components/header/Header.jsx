@@ -8,7 +8,7 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from "date-fns";
 
-export const Header = () => {
+export const Header = ({type}) => {
 
     const [openDate, setOpenDate] = useState(false);
     const [date, setDate] = useState([
@@ -39,7 +39,7 @@ const handleOption = (name, operation) => {
 
   return (
     <div className='header'>
-        <div className="headerContainer">
+        <div className= {type === "list" ? "headerContainer listMode" : "headerContainer"}>
             <div className="headerList">
                 <div className="headerListItem active">
                     <FontAwesomeIcon icon={faBed} />
@@ -62,7 +62,8 @@ const handleOption = (name, operation) => {
                     <span>Airport Taxis</span>
                 </div>
             </div>
-            <h1 className="headerTitle">A Life of Discounts? It's Genius.</h1>
+            { type !== "list" && 
+            <> <h1 className="headerTitle">A Life of Discounts? It's Genius.</h1>
             <p className="headerDesc">
                 Get rewarded for your travels - unlock instant savings of 10% or more with a free VanquisBooking account
             </p>
@@ -121,7 +122,7 @@ const handleOption = (name, operation) => {
                 <div className="headerSearchItem">
                     <button className="headerBtn">Search</button>
                 </div>
-            </div>
+            </div> </>}
         </div>
     </div>
   )
