@@ -1,7 +1,80 @@
 import React from 'react'
+import './hotel.css'
+import {Navbar} from '../../components/navbar/Navbar.jsx'
+import {Header} from '../../components/header/Header.jsx'
+import {MailList} from '../../components/mailList/MailList.jsx'
+import {Footer} from '../../components/footer/Footer.jsx'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
 export const Hotel = () => {
+
+  const photos = [
+    {
+      src:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/63502504.jpg?k=500e187dddc5ee2cd7f118a335e861f14f925d4db791e9d1d53332ab64cbce84&o=&hp=1"
+    },
+    {
+      src:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/60706831.jpg?k=41b51ddae9e7d3347c00070ba2949198951d794543e4f2c643275c4220eb780e&o=&hp=1"
+    },
+    {
+      src:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/116050972.jpg?k=696aed01093446bf0ac3d4a7fa2ec7e92e6d2bed8dac4ebd6edb8b1e12f40cb0&o=&hp=1"
+    },
+    {
+      src:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/60706840.jpg?k=3f7a141448670402899b6b8c18504f68b8787f34fbf06da266bd57173341ba4b&o=&hp=1"
+    },
+    {
+      src:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/60706895.jpg?k=bbc85a9200ef17029c0ec1762a117a675d36468912923a180f0ef6ff2073476d&o=&hp=1"
+    },
+    {
+      src:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/63510195.jpg?k=81d800340fc9a1f90770676537c879d8ccad925f69fca15a445d6c56bb053087&o=&hp=1"
+    },
+  ]
+
   return (
-    <div>Hotel</div>
+    <div>
+      <Navbar/>
+      <Header type="list"/>
+      <div className="hotelContainer">
+        <div className="hotelWrapper">
+          <button className="bookNow">Reserve or Book Now!</button>
+          <h1 className="hotelTitle">Grand Hotel</h1>
+          <div className="hotelAddress">
+            <FontAwesomeIcon icon = {faLocationDot}/>
+            <span>Elton St 125 New York</span>
+          </div>
+          <span className="hotelDistance">Excellent Location - 500m from center</span>
+          <span className="hotelPriceHighlight">Book a stay over £114 at this property and get a free airport taxi</span>
+          <div className="hotelImages">
+            {photos.map(photo => (
+              <div className="hotelImgWrapper">
+                <img src={photo.src} className='hotelImg'></img>
+              </div>
+            ))}
+          </div>
+          <div className="hotelDetails">
+            <div className="hotelDetailsTexts">
+              <h1 className='hotelTitle'>Hotel Edison Times Square</h1>
+              <p className="hotelDesc">
+                Ideally located in Times Square, this Manhattan hotel has been around since 1930. With distinct influences of the Art Deco era in the design of the lobby and the exterior, Hotel Edison offers Classic and Signature rooms and suites.
+                Each room and suite features flat-screen cable TV. The private bathrooms are equipped with a hairdryer and free toiletries. Air conditioning is also included.
+                The Hotel Edison in Manhattan offers concierge service, 24-hour business and fitness centers and a transportation desk. The Edison Ballroom provides event space. Room service is available for limited hours.
+              </p>
+            </div>
+            <div className="hotelDetailsPrice">
+              <h1>Perfect for a 9-night stay!</h1>
+              <span>
+              Couples particularly like the location — they rated it 9.3 for a two-person trip.
+              </span>
+              <h2>
+                <b>£945</b> (9 Nights)
+              </h2>
+              <button>Reserve or Book Now!</button>
+            </div>
+          </div>
+        </div>
+        <MailList/>
+        <Footer/>
+      </div>
+    </div>
   )
 }
