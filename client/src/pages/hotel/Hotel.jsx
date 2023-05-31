@@ -1,13 +1,21 @@
-import React from 'react'
-import './hotel.css'
-import {Navbar} from '../../components/navbar/Navbar.jsx'
-import {Header} from '../../components/header/Header.jsx'
-import {MailList} from '../../components/mailList/MailList.jsx'
-import {Footer} from '../../components/footer/Footer.jsx'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import './hotel.css';
+import {Navbar} from '../../components/navbar/Navbar.jsx';
+import {Header} from '../../components/header/Header.jsx';
+import {MailList} from '../../components/mailList/MailList.jsx';
+import {Footer} from '../../components/footer/Footer.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import useFetch from '../../hooks/useFetch';
+import {useLocation} from "react-router-dom";
+
 
 export const Hotel = () => {
+
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+
+  const {data, loading, error} = useFetch(`/hotels/find/${id}`)
 
   const photos = [
     {
@@ -34,18 +42,19 @@ export const Hotel = () => {
     <div>
       <Navbar/>
       <Header type="list"/>
+      {loading ? ("loading") : (
       <div className="hotelContainer">
         <div className="hotelWrapper">
           <button className="bookNow">Reserve or Book Now!</button>
-          <h1 className="hotelTitle">Grand Hotel</h1>
+          <h1 className="hotelTitle">{data.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon = {faLocationDot}/>
-            <span>Elton St 125 New York</span>
+            <span>{data.address}</span>
           </div>
-          <span className="hotelDistance">Excellent Location - 500m from center</span>
-          <span className="hotelPriceHighlight">Book a stay over £114 at this property and get a free airport taxi</span>
+          <span className="hotelDistance">Excellent Location - {data.distance}m from center</span>
+          <span className="hotelPriceHighlight">Book a stay over £{data.cheapestPrice} at this property and get a free airport taxi</span>
           <div className="hotelImages">
-            {photos.map(photo => (
+            {data.photos?.map(photo => (
               <div className="hotelImgWrapper">
                 <img src={photo.src} className='hotelImg'></img>
               </div>
@@ -53,11 +62,9 @@ export const Hotel = () => {
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsTexts">
-              <h1 className='hotelTitle'>Hotel Edison Times Square</h1>
+              <h1 className='hotelTitle'>{data.title}</h1>
               <p className="hotelDesc">
-                Ideally located in Times Square, this Manhattan hotel has been around since 1930. With distinct influences of the Art Deco era in the design of the lobby and the exterior, Hotel Edison offers Classic and Signature rooms and suites.
-                Each room and suite features flat-screen cable TV. The private bathrooms are equipped with a hairdryer and free toiletries. Air conditioning is also included.
-                The Hotel Edison in Manhattan offers concierge service, 24-hour business and fitness centers and a transportation desk. The Edison Ballroom provides event space. Room service is available for limited hours.
+                {data.desc}
               </p>
             </div>
             <div className="hotelDetailsPrice">
@@ -74,7 +81,7 @@ export const Hotel = () => {
         </div>
         <MailList/>
         <Footer/>
-      </div>
+      </div>)}
     </div>
   )
 }
