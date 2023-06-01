@@ -21,6 +21,16 @@ export const Hotel = () => {
 
   const { dates, options } = useContext(SearchContext);
 
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
+
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+
+
   const photos = [
     {
       src:"https://cf.bstatic.com/xdata/images/hotel/max1024x768/63502504.jpg?k=500e187dddc5ee2cd7f118a335e861f14f925d4db791e9d1d53332ab64cbce84&o=&hp=1"
@@ -72,12 +82,12 @@ export const Hotel = () => {
               </p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Perfect for a 9-night stay!</h1>
+              <h1>Perfect for a {days}-night stay!</h1>
               <span>
               Couples particularly like the location — they rated it 9.3 for a two-person trip.
               </span>
               <h2>
-                <b>£945</b> (9 Nights)
+                <b>£{days * data.cheapestPrice * options.room}</b> ({days} Nights)
               </h2>
               <button>Reserve or Book Now!</button>
             </div>
