@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import useFetch from '../../hooks/useFetch';
 import {useLocation} from "react-router-dom";
+import { useContext } from 'react';
+import { SearchContext } from "../../context/SearchContext";
 
 
 export const Hotel = () => {
@@ -16,6 +18,8 @@ export const Hotel = () => {
   const id = location.pathname.split("/")[2];
 
   const {data, loading, error} = useFetch(`/hotels/find/${id}`)
+
+  const { dates, options } = useContext(SearchContext);
 
   const photos = [
     {

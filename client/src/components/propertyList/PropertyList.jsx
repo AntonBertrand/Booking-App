@@ -17,7 +17,7 @@ export const PropertyList = () => {
   return (
     <div className='pList'>
         {loading ? ("loading") :  (<> 
-        {data && images.map((img, i) => (<div className="pListItem">
+        {data && images.map((img, i) => (<div className="pListItem" key={i}>
             <img src={img} alt="" className="pListImg" />
             <div className="pListTitles">
                 <h1>{data[i]?.type}</h1>
