@@ -9,6 +9,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 
 export const Header = ({type}) => {
@@ -30,7 +31,8 @@ export const Header = ({type}) => {
       });
       
 
-const navigate = useNavigate()
+const navigate = useNavigate();
+const { user } = useContext(AuthContext);
 
 
 const handleOption = (name, operation) => {
