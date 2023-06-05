@@ -10,8 +10,8 @@ export const SearchItem = ({item}) => {
             <h1 className="siTitle">{item.name}</h1>
             <span className="siDistance">{item.distance}m from center</span>
             <span className="siTaxiOp">Free airport taxi</span>
-            <span className="siSubtitle">Hotel in San Antonio</span>
-            <span className="siFeatures">{item.desc}</span>
+            <span className="siSubtitle">VanquisBooking Approved!</span>
+            <span className="siFeatures">{(item.desc).slice(0,150)+'...'}</span>
             <span className="siCancelOp">Free Cancellation</span>
             <span className="siCancelOpSubtitle">You can cancel later, so lock in this great price today!</span>
         </div>
