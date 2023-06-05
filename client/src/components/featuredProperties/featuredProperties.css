@@ -8,21 +8,29 @@
 
 .fpItem {
     flex: 1;
-    gap: 10px;
     display: flex;
     flex-direction: column;
 }
 
 .fpImg {
     width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: ease 1s;
+}
+
+.fpImg:hover {
+    transform: scale(0.95);
 }
 
 .fpName {
     font-weight: bold;
+    margin-top: 1rem;
 }
 
 .fpCity {
     font-weight: 300;
+    text-transform:capitalize;
 }
 
 .fpPrice {
