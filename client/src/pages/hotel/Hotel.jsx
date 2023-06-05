@@ -89,7 +89,7 @@ export const Hotel = () => {
           <div className="hotelImages">
             {data.photos?.map(photo => (
               <div className="hotelImgWrapper">
-                <img src={photo.src} className='hotelImg'></img>
+                <img src={photo} className='hotelImg'></img>
               </div>
             ))}
           </div>

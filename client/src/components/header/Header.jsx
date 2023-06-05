@@ -45,6 +45,7 @@ const handleOption = (name, operation) => {
 const { dispatch } = useContext(SearchContext);
 
 const handleSearch = () => {
+
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", {state:{destination,dates,options}} )
 }
@@ -84,10 +85,13 @@ const handleSearch = () => {
             <div className="headerSearch">
                 <div className="headerSearchItem">
                     <FontAwesomeIcon icon={faBed} className='headerIcon' />
-                    <input type="text" placeholder='Where are you going?' className='headerSearchInput' onChange={e => setDestination(e.target.value)}/>
+                    <input type="text" placeholder='Where are you going?' 
+                    className='headerSearchInput' 
+                    onChange={e => 
+                    setDestination((e.target.value).toLowerCase())}/>
                 </div>
 
-                <div className="headerSearchItem">
+                <div className="headerSearchItem"> 
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                 <span
                   onClick={() => setOpenDate(!openDate)}
