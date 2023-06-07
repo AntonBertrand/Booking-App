@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    
 }
 
 .fpItem {
@@ -17,6 +18,9 @@
     height: 250px;
     object-fit: cover;
     transition: ease 1s;
+    cursor: pointer;
+
+    
 }
 
 .fpImg:hover {
