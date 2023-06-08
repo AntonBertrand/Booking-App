@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 export const FeaturedProperties = () => {
 
-    const {data, loading, error} = useFetch(process.env.REACT_APP_BASEURL + "/hotels?featured=true");
+    const {data, loading, error} = useFetch("/hotels?featured=true");
 
   return (
     <div className='fp'>
