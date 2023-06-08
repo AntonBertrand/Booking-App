@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 export const FeaturedProperties = () => {
 
-    const {data, loading, error} = useFetch("/hotels?featured=true");
+    const {data, loading, error} = useFetch("https://booking-app-ue5a.onrender.com/api/hotels?featured=true");
 
   return (
     <div className='fp'>
