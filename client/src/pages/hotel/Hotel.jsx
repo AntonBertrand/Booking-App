@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import useFetch from '../../hooks/useFetch';
 import {useLocation, useNavigate} from "react-router-dom";
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import { Reserve } from '../../components/reserve/Reserve';
@@ -23,6 +23,7 @@ export const Hotel = () => {
 
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [days, setDays] = useState(1);
 
   const {data, loading, error} = useFetch(`/hotels/find/${id}`)
   const { user } = useContext(AuthContext);
@@ -31,13 +32,29 @@ export const Hotel = () => {
   const { dates, options } = useContext(SearchContext);
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+
+  useEffect(() => {
+    
+    function calcDays() {
+      if (dates[0]) {
+        console.log("present")
+        setDays(dayDifference(dates[0].endDate, dates[0].startDate));
+      }  else {
+        console.log("not present")
+      }
+    }
+
+    calcDays();
+
+  }, [])
+  
+  
   function dayDifference(date1, date2) {
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
   const handleClick = () => {
     if (user) {
