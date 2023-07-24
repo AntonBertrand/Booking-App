@@ -10,3 +10,25 @@
     width: 1024px;
     font-size: 20px;
 }
+
+@media only screen and (max-width: 1000px)  {
+
+    .homeContainer {
+        overflow: hidden;
+        padding: 0 1rem;
+    }
+
+    .homeTitle {
+        padding-left: 22rem;
+    }
+
+}
+
+
+@media only screen and (max-width: 600px)  {
+
+    .homeTitle {
+        padding-left: 35rem;
+    }
+
+}

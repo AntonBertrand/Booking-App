@@ -131,3 +131,35 @@
 .optionCounterButton:disabled {
     cursor: not-allowed;
 }
+
+@media only screen and (max-width: 600px)  {
+
+    .header {
+        padding: 0 1rem;
+    }
+
+    .headerList span{
+        display: none;
+    }
+
+    .headerList {
+        justify-content: space-between;
+        padding: 0 1rem;
+    }
+
+    .headerSearch {
+        height: 50px;
+        bottom: -25px;
+        max-width: 90%;
+    }
+
+    .headerBtn {
+        font-size: 12px;
+        padding: 5px;
+    }
+    
+    .headerSearchText{
+        font-size: 13px;
+    }
+
+}
