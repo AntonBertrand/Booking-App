@@ -21,11 +21,14 @@ export const Login = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
+    console.log("Attempted login")
     try {
       const res = await axios.post("/auth/login", credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      console.log("Loggin success")
       navigate("/")
     } catch (err) {
+      console.log("Loggin Fail")
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
   };
