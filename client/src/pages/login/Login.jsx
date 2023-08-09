@@ -27,13 +27,14 @@ export const Login = () => {
         withCredentials: true,
         credentials: 'include',
         headers: {
-          Accept: 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          Accept: 'application/json'
         }
-      });
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      console.log("Loggin success")
-      navigate("/")
+      }).then(res => {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        console.log("Loggin success")
+        navigate("/")
+      })
+
     } catch (err) {
       console.log("Loggin Fail")
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
