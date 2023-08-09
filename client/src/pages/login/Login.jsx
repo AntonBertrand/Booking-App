@@ -23,7 +23,10 @@ export const Login = () => {
     dispatch({ type: "LOGIN_START" });
     console.log("Attempted login")
     try {
-      const res = await axios.post("/auth/login", credentials, { withCredentials: true } );
+      const res = await axios.post("/auth/login", credentials, {
+        withCredentials: true,
+        credentials: 'include',
+      });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       console.log("Loggin success")
       navigate("/")
