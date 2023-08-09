@@ -1,11 +1,12 @@
 import React from 'react';
 import "./navbar.css";
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 export const Navbar = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   return (
     <div className='navbar'>
@@ -13,10 +14,10 @@ export const Navbar = () => {
           <Link to = "/" style={{color:"inherit", textDecoration: "none"}}>
           <span className="logo">VanquisBooking</span>
           </Link>
-          {user ? user.username : (
+          {user ? "Logged in as " + user.username : (
           <div className="navItems">
-            <button className="navButton">Register</button>
-            <button className="navButton">Login</button>
+            <button className="navButton" onClick={() => navigate("/login")}>
+              Login</button>
           </div>
         )}
         </div>
