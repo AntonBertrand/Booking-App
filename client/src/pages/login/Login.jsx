@@ -26,6 +26,10 @@ export const Login = () => {
       const res = await axios.post("/auth/login", credentials, {
         withCredentials: true,
         credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
       });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
       console.log("Loggin success")
