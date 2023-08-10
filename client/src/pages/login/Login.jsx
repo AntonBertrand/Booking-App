@@ -21,20 +21,11 @@ export const Login = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
-    console.log("Attempted login")
     try {
-      const res = await fetch("https://booking-app-ue5a.onrender.com/api/auth/login", credentials, {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json'},
-        credentials: 'include'
-      }).then(res => {
-        dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-        console.log("Loggin success")
-        navigate("/")
-      })
-
+      const res = await axios.post("/auth/login", credentials);
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      navigate("/")
     } catch (err) {
-      console.log("Loggin Fail")
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
   };
