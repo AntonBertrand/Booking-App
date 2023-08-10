@@ -22,9 +22,16 @@ export const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/login", credentials);
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      navigate("/")
+      const res = await axios.post("/auth/login", credentials)
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+          navigate("/")
+        } else {
+          dispatch({ type: "LOGIN_FAILURE", payload: "Error with authentication" });
+        }
+      })
+
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
