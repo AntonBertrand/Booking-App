@@ -18,22 +18,37 @@ export const Login = () => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
+
+
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/login", credentials)
-      .then(res => {
-        if (res.status === 200) {
-          dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-          navigate("/")
-        } else {
-          dispatch({ type: "LOGIN_FAILURE", payload: "Error with authentication" });
+      const res = await fetch("https://booking-app-ue5a.onrender.com/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify(credentials),
+        headers: { 'Content-Type': 'application/json'},
+        credentials: 'include'
+      }).then(res => {
+
+        console.log(res);
+
+        if (res.status != 200) {
+          throw res;
         }
-      })
+
+        return res.json();
+
+      }).then(res => {
+        console.log(res)
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.details });
+        navigate("/") 
+      }
+      )
 
     } catch (err) {
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+      console.log(err)
+      dispatch({ type: "LOGIN_FAILURE", payload: "ERROR MAYN" });
     }
   };
 
