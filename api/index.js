@@ -28,7 +28,7 @@ mongoose.connection.on("disconnected", () => {
 //middlewares
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({credentials: true, origin: 'https://booking-app-frontend-8uip.onrender.com'}));
+app.use(cors({origin: true, credentials: true}));
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);

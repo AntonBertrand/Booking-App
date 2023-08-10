@@ -23,12 +23,10 @@ export const Login = () => {
     dispatch({ type: "LOGIN_START" });
     console.log("Attempted login")
     try {
-      const res = await axios.post("/auth/login", credentials, {
-        withCredentials: true,
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json'
-        }
+      const res = await fetch("https://booking-app-ue5a.onrender.com/api/auth/login", credentials, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json'},
+        credentials: 'include'
       }).then(res => {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
         console.log("Loggin success")
