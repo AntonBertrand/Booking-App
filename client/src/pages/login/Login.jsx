@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./login.css";
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 export const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -31,30 +31,30 @@ export const Login = () => {
         credentials: 'include'
       }).then(res => {
 
-        console.log(res);
-
-        if (res.status != 200) {
+        if (res.status !== 200) {
           throw res;
         }
 
         return res.json();
 
       }).then(res => {
-        console.log(res)
         dispatch({ type: "LOGIN_SUCCESS", payload: res.details });
         navigate("/") 
       }
       )
 
     } catch (err) {
-      console.log(err)
-      dispatch({ type: "LOGIN_FAILURE", payload: "ERROR MAYN" });
+      err = err.json();
+      console.log(err);
+
+      dispatch({ type: "LOGIN_FAILURE", payload: err });
     }
   };
 
 
   return (
     <div className="login">
+      {loading ? <LoadingSpinner /> : null}
       <div className="lContainer">
         <input
           type="text"
